@@ -37,6 +37,10 @@ Geometry * PointParser::Parse ( cvct::VCTGeometry & geo )
 	t->push_back(parsepoint(pTemp));
 	Geometry * gt = new Geometry();
 	gt->push_back ( t );
+
+	/// 点的节点个数为1
+	geo.nVertices = 1;
+
 	CPLFree ( pTemp );
 	return gt;
 }
@@ -56,8 +60,11 @@ Geometry * LineParser::Parse ( cvct::VCTGeometry & geo )
 
 	Geometry * gt = new Geometry();
 	gt->push_back ( t );
-	CSLDestroy ( poPoint );
 
+	/// 获得线的结点个数
+	geo.nVertices = t->size();
+
+	CSLDestroy ( poPoint );
 	CPLFree ( pTemp );
 
 	return gt;
@@ -138,6 +145,9 @@ Geometry * PolyParser::Parse ( cvct::VCTGeometry & geo )
 				PolyParser ipoly(vctfile, vctindex);
 				geoline = ipoly.Parse ( it->geometry );
 			}
+
+			/// 增加结点个数
+			geo.nVertices += it->geometry.nVertices;
 
 			//将线对象放到环中
 			if ( bset )
