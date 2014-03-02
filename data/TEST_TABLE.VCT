@@ -1,0 +1,6 @@
+TEST1,4
+TEST1,Integer,10
+TEST2,Char,10
+TEST3,Float,10,3
+TEST4,Date,8
+TEST5,Varbin
