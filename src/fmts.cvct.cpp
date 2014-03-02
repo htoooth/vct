@@ -32,7 +32,7 @@ static cvct::LinePtr ReadLine ( VFile * vsifile )
 	vsi_l_offset start_pos = VSIFTellL ( vsifile );
 	char * line_str = CPLStrdup ( CPLReadLineL ( vsifile ) );
 	vsi_l_offset end_pos = VSIFTellL ( vsifile );
-	return cvct::LinePtr ( new cvct::LineObj ( start_pos, end_pos, line_str ) );
+	return cvct::LinePtr ( new cvct::line ( start_pos, end_pos, line_str ) );
 }
 
 cvct::VCTDataSource * cvct::CVCTOpen( const char * pszFile )

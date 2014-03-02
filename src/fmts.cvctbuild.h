@@ -190,7 +190,7 @@ public:
 
 	char * GetCurrentLine()
 	{
-		return m_line->line;
+		return m_line->value;
 	};
 
 	FilePos GetStartPos()

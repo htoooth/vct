@@ -89,41 +89,41 @@ inline FieldType GetNameToFieldType ( const char * name )
 /************************************************************************/
 /* 读文件使用的行对象                                                                     */
 /************************************************************************/
-struct LineObj
+struct line
 {
 	FilePos start_pos;
 
 	FilePos end_pos;
 
-	char * line;
+	char * value;
 
-	LineObj() 
-        : line ( NULL)
+	line() 
+        : value ( NULL)
         , start_pos ( 0 )
         , end_pos ( 0 ) 
     {};
 
-	LineObj ( FilePos nstart, FilePos nend, char * newline ) 
+	line ( FilePos nstart, FilePos nend, char * newline ) 
         : start_pos ( nstart )
         , end_pos ( nend )
-        , line ( CPLStrdup ( newline ) ) 
+        , value ( CPLStrdup ( newline ) ) 
     {};
 
-	LineObj ( const LineObj & obj ) 
-        : line ( CPLStrdup ( obj.line ) )
+	line ( const line & obj ) 
+        : value ( CPLStrdup ( obj.value ) )
         , start_pos ( obj.start_pos )
         , end_pos ( obj.end_pos ) 
     {};
 
 	///申请和释放统一，用CPL库
-	~LineObj()
+	~line()
 	{
-		CPLFree ( line );
+		CPLFree ( value );
 	};
 
 };
 
-typedef auto_ptr<LineObj> LinePtr;
+typedef auto_ptr<line> LinePtr;
 
 class VCTDataSource;
 
